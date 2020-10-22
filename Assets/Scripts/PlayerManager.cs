@@ -10,6 +10,8 @@ public class PlayerManager : MonoBehaviour
 
     public List<GameObject> collidedList;
 
+    public Transform particlePrefab;
+
     public Transform collectedPoolTransform;
     public enum PlayerState
     {

@@ -90,6 +90,8 @@ public class CollectedObjectController : MonoBehaviour
         playerManager.collidedList.Remove(gameObject);
         Destroy(gameObject);
 
+        Transform particle = Instantiate(playerManager.particlePrefab,transform.position,Quaternion.identity);
+        particle.GetComponent<ParticleSystem>().startColor = playerManager.collectedObjMaterial.color;
     }
 
     public void DropObject()
