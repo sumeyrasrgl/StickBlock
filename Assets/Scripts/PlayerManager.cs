@@ -16,7 +16,6 @@ public class PlayerManager : MonoBehaviour
         Stop,
         Move
 
-
     }
 
     public enum LevelState
