@@ -61,11 +61,45 @@ public class CollectedObjectController : MonoBehaviour
                 }
             }
         }
+
+        if (other.gameObject.CompareTag("FinishLine"))
+        {
+            if (playerManager.levelState!=PlayerManager.LevelState.Finished)
+            {
+                playerManager.levelState = PlayerManager.LevelState.Finished;
+                playerManager.CallMakeSphere();
+            }
+        }
     }
 
 
+    public void MakeSphere()
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+
+        sphere.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        sphere.gameObject.GetComponent<SphereCollider>().enabled = true;
+        sphere.gameObject.GetComponent<SphereCollider>().isTrigger = true;
+
+        sphere.gameObject.GetComponent<Renderer>().material = playerManager.collectedObjMaterial;
+
+    }
     void DestroyObject()
     {
+        playerManager.collidedList.Remove(gameObject);
         Destroy(gameObject);
+
     }
+
+    public void DropObject()
+    {
+        sphere.gameObject.layer = 8;
+
+        sphere.gameObject.GetComponent<SphereCollider>().isTrigger = false;
+        sphere.gameObject.AddComponent<Rigidbody>();
+        sphere.GetComponent<Rigidbody>().useGravity = true;
+    }
+
+
 }

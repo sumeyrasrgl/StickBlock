@@ -23,4 +23,13 @@ public class PlayerManager : MonoBehaviour
         NotFinished,
         Finished
     }
+
+
+    public void CallMakeSphere()
+    {
+        foreach (GameObject obj in collidedList)
+        {
+            obj.GetComponent<CollectedObjectController>().MakeSphere();
+        }
+    }
 }
