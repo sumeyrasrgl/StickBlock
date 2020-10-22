@@ -6,6 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     public Material collectedObjMaterial;
     public PlayerState playerState;
+    public LevelState levelState;
 
     public List<GameObject> collidedList;
 
@@ -15,5 +16,11 @@ public class PlayerManager : MonoBehaviour
         Stop,
         Move
 
+    }
+
+    public enum LevelState
+    {
+        NotFinished,
+        Finished
     }
 }

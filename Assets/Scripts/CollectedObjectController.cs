@@ -38,5 +38,34 @@ public class CollectedObjectController : MonoBehaviour
                 collision.gameObject.AddComponent<CollectedObjectController>();
             }
         }
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            DestroyObject();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("CollectibleList"))
+        {
+            other.transform.GetComponent<BoxCollider>().enabled = false;
+            other.transform.parent = playerManager.collectedPoolTransform;
+
+            foreach (Transform child in other.transform)
+            {
+                if (!playerManager.collidedList.Contains(other.gameObject))
+                {
+                    playerManager.collidedList.Add(child.gameObject);
+                    child.gameObject.tag = "CollectedObject";
+                    child.gameObject.AddComponent<CollectedObjectController>();
+                }
+            }
+        }
+    }
+
+
+    void DestroyObject()
+    {
+        Destroy(gameObject);
     }
 }
